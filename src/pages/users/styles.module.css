@@ -1,24 +1,20 @@
 .pageContainer {
   padding: 20px;
   min-height: 100vh;
-  background: #1a0259;
 }
 
 .pageTitle {
-  margin-bottom: 24px !important;
-  color: #ffffff !important;
+  margin-bottom: 24px;
 }
 
 .searchSection {
   margin-bottom: 20px;
-  background: #14264c;
   padding: 16px;
   border-radius: 8px;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 6px -1px rgba(0, 0, 0, 0.15);
 }
 
 .searchRow {
-  margin-bottom: 0 !important;
+  margin-bottom: 0;
 }
 
 @media (max-width: 768px) {

@@ -27,6 +27,8 @@
     "colorFillContent": "#14264c",
     "colorFillContentHover": "#1e3a5f",
     "boxShadowSecondary": "0 2px 4px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 0 rgba(0, 0, 0, 0.2)",
-    "boxShadowTertiary": "0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3)"
+    "boxShadowTertiary": "0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3)",
+    "colorBgSpotlight": "#14264c",
+    "colorTextLightSolid": "#ffffff"
   }
 }
