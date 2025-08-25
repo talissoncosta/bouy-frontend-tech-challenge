@@ -21,6 +21,9 @@ export class LoginApiService extends LoginService {
     return this.retrieveFromLocalStorage();
   }
 
+  private refreshPromise: Promise<LoginResponseData> | null = null;
+  private refreshInProgress: boolean = false;
+
   public async getValidToken(): Promise<LoginResponseData | null> {
     const token = await this.getCurrentToken();
     if (!token || !token.access) {
@@ -30,21 +33,45 @@ export class LoginApiService extends LoginService {
 
     try {
       const parsedToken = this.parseJwt(token?.access);
-
-      if (new Date().getTime() / 1000 > parsedToken.exp) {
-        const response: LoginResponseData = await this.fetchPost(
-          "/refresh/",
-          { method: "POST" },
-          { refresh: token.refresh }
-        );
-        this.storeInLocalStorage(response);
+      const isExpired = new Date().getTime() / 1000 > parsedToken.exp;
+      
+      if (isExpired) {
+        // Check if refresh is already in progress
+        if (this.refreshPromise) {
+          // Wait for existing refresh to complete
+          await this.refreshPromise;
+          return this.retrieveFromLocalStorage();
+        }
+        
+        // Start new refresh process
+        this.refreshInProgress = true;
+        this.refreshPromise = this.performRefresh(token.refresh);
+        
+        try {
+          await this.refreshPromise;
+        } finally {
+          // Clean up
+          this.refreshPromise = null;
+          this.refreshInProgress = false;
+        }
       }
+      
       return this.retrieveFromLocalStorage();
     } catch (e) {
       console.log(e);
       this.logout();
+      return null;
     }
-    return null;
+  }
+  
+  private async performRefresh(refreshToken: string): Promise<LoginResponseData> {
+    const response: LoginResponseData = await this.fetchPost(
+      "/refresh/",
+      { method: "POST" },
+      { refresh: refreshToken }
+    );
+    this.storeInLocalStorage(response);
+    return response;
   }
 
   private loginDataKey = "loginData";
