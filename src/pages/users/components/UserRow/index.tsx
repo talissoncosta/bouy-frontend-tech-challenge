@@ -1,6 +1,6 @@
-import { theme } from 'antd';
 import { UserData } from 'services/users/interface';
 import { UserAvatar } from '../UserAvatar';
+import styles from './styles.module.css';
 
 interface UserRowProps {
   user: UserData;
@@ -8,46 +8,14 @@ interface UserRowProps {
 }
 
 export function UserRow({ user, isLoading = false }: UserRowProps) {
-  const {
-    token: { colorText, colorFillContent, borderRadius }
-  } = theme.useToken();
-
   return (
-    <div 
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '12px'
-      }}
-      role="gridcell"
-    >
+    <div className={styles.userRow} role="gridcell">
       <UserAvatar user={user} />
-      <div 
-        style={{
-          display: 'flex',
-          flexDirection: 'column'
-        }}
-      >
+      <div className={styles.userInfo}>
         {isLoading ? (
-          <div 
-            style={{
-              backgroundColor: colorFillContent,
-              borderRadius,
-              height: '20px',
-              width: '120px'
-            }}
-          />
+          <div className={styles.userNameLoading} />
         ) : (
-          <div 
-            style={{
-              color: colorText,
-              fontWeight: 500,
-              fontSize: '14px',
-              lineHeight: '20px'
-            }}
-          >
-            {user.fullName}
-          </div>
+          <div className={styles.userName}>{user.fullName}</div>
         )}
       </div>
     </div>

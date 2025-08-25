@@ -1,7 +1,8 @@
-import { Table, Button, theme } from 'antd';
+import { Table, Button } from 'antd';
 import { useIntl } from 'react-intl';
 import { UserData } from 'services/users/interface';
 import { UserRow } from '../UserRow';
+import styles from './styles.module.css';
 
 interface UsersTableProps {
   data: UserData[];
@@ -20,9 +21,6 @@ export function UsersTable({
   onEditUser 
 }: UsersTableProps) {
   const { formatMessage } = useIntl();
-  const {
-    token: { colorBgContainer, borderRadiusLG, boxShadowSecondary }
-  } = theme.useToken();
   const columns = [
     {
       title: formatMessage({ id: "page.users.table.columns.id" }),
@@ -59,7 +57,7 @@ export function UsersTable({
       key: "actions",
       width: 120,
       render: (_: any, record: UserData) => (
-        <div style={{ display: 'flex', gap: '8px' }}>
+        <div className={styles.actionButtons}>
           <Button
             type="link"
             size="small"
@@ -82,27 +80,20 @@ export function UsersTable({
   ];
 
   return (
-    <div style={{ 
-      backgroundColor: colorBgContainer, 
-      borderRadius: borderRadiusLG,
-      overflow: 'hidden',
-      boxShadow: boxShadowSecondary
-    }}>
-      <Table
-        dataSource={data}
-        columns={columns}
-        rowKey="id"
-        loading={loading}
-        pagination={{
-          pageSize,
-          showSizeChanger: false,
-          showQuickJumper: true,
-          showTotal: (total, range) => 
-            `${range[0]}-${range[1]} of ${total} users`,
-        }}
-        scroll={{ x: 800 }}
-        aria-label={formatMessage({ id: "page.users.table.aria.label" })}
-      />
-    </div>
+    <Table
+      dataSource={data}
+      columns={columns}
+      rowKey="id"
+      loading={loading}
+      pagination={{
+        pageSize,
+        showSizeChanger: false,
+        showQuickJumper: true,
+        showTotal: (total, range) => 
+          `${range[0]}-${range[1]} of ${total} users`,
+      }}
+      scroll={{ x: 800 }}
+      aria-label={formatMessage({ id: "page.users.table.aria.label" })}
+    />
   );
 }

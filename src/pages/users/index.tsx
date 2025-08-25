@@ -1,24 +1,20 @@
-import { Row, Col, Typography, theme } from "antd";
+import { Row, Col, Card } from "antd";
 import { useIntl } from "react-intl";
 import { useUsers } from "hooks";
 import { useState, useMemo, useCallback } from "react";
 import { UserData } from "services/users/interface";
 import { useDebounce } from "hooks";
-import { SearchInput } from "./components/SearchInput";
+import { SearchInput } from "./components/SearchInput"; 
 import { UsersTable } from "./components/UsersTable";
+import { ContentLayout } from "components/layout/content";
 
 const PAGE_SIZE = 13;
-const { Title } = Typography;
-
 
 export function Users() {
     const { formatMessage } = useIntl();
     const { data, isLoading } = useUsers();
     const [searchTerm, setSearchTerm] = useState("");
     const debouncedSearchTerm = useDebounce(searchTerm, 300);
-    const {
-        token: { colorBgBase, colorText, colorBgContainer, borderRadiusLG, boxShadowSecondary }
-    } = theme.useToken();
 
     // Client-side filtering logic with debounced search
     const filteredData = useMemo(() => {
@@ -46,48 +42,38 @@ export function Users() {
     }, []);
 
     return (
-        <div 
-            role="main"
-            style={{
-                backgroundColor: colorBgBase,
-                color: colorText,
-                minHeight: '100vh',
-                padding: '20px'
-            }}
-        >
-            <Title level={2} style={{ color: colorText, marginBottom: '24px' }}>
-                {formatMessage({ id: "page.users.title" })}
-            </Title>
-            
-            <div 
-                style={{
-                    backgroundColor: colorBgContainer,
-                    borderRadius: borderRadiusLG,
-                    padding: '16px',
-                    marginBottom: '20px',
-                    boxShadow: boxShadowSecondary
-                }}
-            >
-                <Row gutter={[16, 16]}>
-                    <Col xs={24} md={12}>
-                        <SearchInput 
-                            value={searchTerm}
-                            onChange={setSearchTerm}
-                            placeholder={formatMessage({ id: "page.users.search.placeholder" })}
-                            aria-label={formatMessage({ id: "page.users.search.aria.label" })}
-                            data-testid="users-search"
+        <ContentLayout>
+            <Row justify="space-around" gutter={[0, 20]}>
+                <Col span={22}>
+                    <Card style={{ marginBottom: '24px' }}>
+                        <Row gutter={[16, 16]}>
+                            <Col xs={24} md={12}>
+                                <SearchInput 
+                                    value={searchTerm}
+                                    onChange={setSearchTerm}
+                                    placeholder={formatMessage({ id: "page.users.search.placeholder" })}
+                                    aria-label={formatMessage({ id: "page.users.search.aria.label" })}
+                                    data-testid="users-search"
+                                />
+                            </Col>
+                        </Row>
+                    </Card>
+                </Col>
+                
+                <Col span={22}>
+                    <Card 
+                        bodyStyle={{ padding: 0 }}
+                    >
+                        <UsersTable
+                            data={filteredData}
+                            loading={isLoading}
+                            pageSize={PAGE_SIZE}
+                            onViewUser={handleViewUser}
+                            onEditUser={handleEditUser}
                         />
-                    </Col>
-                </Row>
-            </div>
-            
-            <UsersTable
-                data={filteredData}
-                loading={isLoading}
-                pageSize={PAGE_SIZE}
-                onViewUser={handleViewUser}
-                onEditUser={handleEditUser}
-            />
-        </div>
+                    </Card>
+                </Col>
+            </Row>
+        </ContentLayout>
     );
 }
