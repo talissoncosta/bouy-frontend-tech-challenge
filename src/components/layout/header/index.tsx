@@ -1,6 +1,7 @@
-import { Layout, Row, Col, theme } from "antd";
+import { Layout, Row, Col, theme, Space } from "antd";
 import { UserProfile } from "./userProfile";
 import { BrandSelect } from "./brandSelect";
+import { ThemeToggle } from "./themeToggle";
 const { Header } = Layout;
 
 type AppHeaderProps = {
@@ -32,7 +33,10 @@ export function AppHeader({ nonSidebarWidth }: AppHeaderProps) {
           <BrandSelect />
         </Col>
         <Col>
-          <UserProfile />
+          <Space size="middle">
+            <ThemeToggle />
+            <UserProfile />
+          </Space>
         </Col>
       </Row>
     </Header>

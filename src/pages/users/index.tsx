@@ -1,4 +1,4 @@
-import { Row, Col, Typography } from "antd";
+import { Row, Col, Typography, theme } from "antd";
 import { useIntl } from "react-intl";
 import { useUsers } from "hooks";
 import { useState, useMemo, useCallback } from "react";
@@ -6,7 +6,6 @@ import { UserData } from "services/users/interface";
 import { useDebounce } from "hooks";
 import { SearchInput } from "./components/SearchInput";
 import { UsersTable } from "./components/UsersTable";
-import styles from "./styles.module.css";
 
 const PAGE_SIZE = 13;
 const { Title } = Typography;
@@ -17,6 +16,9 @@ export function Users() {
     const { data, isLoading } = useUsers();
     const [searchTerm, setSearchTerm] = useState("");
     const debouncedSearchTerm = useDebounce(searchTerm, 300);
+    const {
+        token: { colorBgBase, colorText, colorBgContainer, borderRadiusLG, boxShadowSecondary }
+    } = theme.useToken();
 
     // Client-side filtering logic with debounced search
     const filteredData = useMemo(() => {
@@ -44,13 +46,29 @@ export function Users() {
     }, []);
 
     return (
-        <div className={styles.pageContainer} role="main">
-            <Title level={2} className={styles.pageTitle}>
+        <div 
+            role="main"
+            style={{
+                backgroundColor: colorBgBase,
+                color: colorText,
+                minHeight: '100vh',
+                padding: '20px'
+            }}
+        >
+            <Title level={2} style={{ color: colorText, marginBottom: '24px' }}>
                 {formatMessage({ id: "page.users.title" })}
             </Title>
             
-            <div className={styles.searchSection}>
-                <Row gutter={[16, 16]} className={styles.searchRow}>
+            <div 
+                style={{
+                    backgroundColor: colorBgContainer,
+                    borderRadius: borderRadiusLG,
+                    padding: '16px',
+                    marginBottom: '20px',
+                    boxShadow: boxShadowSecondary
+                }}
+            >
+                <Row gutter={[16, 16]}>
                     <Col xs={24} md={12}>
                         <SearchInput 
                             value={searchTerm}
