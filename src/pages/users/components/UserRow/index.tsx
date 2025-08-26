@@ -14,7 +14,7 @@ export function UserRow({ user, isLoading = false }: UserRowProps) {
   } = theme.useToken();
 
   return (
-    <div className={styles.userRow} role="gridcell">
+    <div className={styles.userRow} aria-label={`User: ${user.fullName}`}>
       <UserAvatar user={user} />
       <div className={styles.userInfo}>
         {isLoading ? (

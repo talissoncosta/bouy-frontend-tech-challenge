@@ -1,8 +1,9 @@
-import { Table, Button } from 'antd';
+import { Table } from 'antd';
 import { useIntl } from 'react-intl';
+import { useMemo } from 'react';
 import { UserData } from 'services/users/interface';
 import { UserRow } from '../UserRow';
-import styles from './styles.module.css';
+import { UserActions } from '../UserActions';
 
 interface UsersTableProps {
   data: UserData[];
@@ -21,7 +22,8 @@ export function UsersTable({
   onEditUser 
 }: UsersTableProps) {
   const { formatMessage } = useIntl();
-  const columns = [
+  
+  const columns = useMemo(() => [
     {
       title: formatMessage({ id: "page.users.table.columns.id" }),
       dataIndex: "id",
@@ -57,27 +59,14 @@ export function UsersTable({
       key: "actions",
       width: 120,
       render: (_: any, record: UserData) => (
-        <div className={styles.actionButtons}>
-          <Button
-            type="link"
-            size="small"
-            onClick={() => onViewUser?.(record)}
-            aria-label={formatMessage({ id: "page.users.table.actions.view.aria" }, { name: record.fullName })}
-          >
-            {formatMessage({ id: "page.users.table.actions.view" })}
-          </Button>
-          <Button
-            type="link"
-            size="small"
-            onClick={() => onEditUser?.(record)}
-            aria-label={formatMessage({ id: "page.users.table.actions.edit.aria" }, { name: record.fullName })}
-          >
-            {formatMessage({ id: "page.users.table.actions.edit" })}
-          </Button>
-        </div>
+        <UserActions
+          user={record}
+          onViewUser={onViewUser}
+          onEditUser={onEditUser}
+        />
       ),
     },
-  ];
+  ], [formatMessage, loading, onViewUser, onEditUser]);
 
   return (
     <Table

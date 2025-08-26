@@ -14,6 +14,7 @@ export function UserAvatar({ user, size = 40, className = '' }: UserAvatarProps)
       alt={`${user.firstName} ${user.lastName}`}
       size={size}
       className={className}
+      aria-label={`Avatar for ${user.fullName}`}
     >
       {user.firstName[0]}{user.lastName[0]}
     </Avatar>
