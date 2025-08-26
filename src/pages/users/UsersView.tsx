@@ -3,7 +3,7 @@ import { UserData } from "services/users/interface";
 import { SearchInput } from "./components/SearchInput";
 import { UsersTable } from "./components";
 
-export interface UsersViewProps {
+type UsersViewProps = {
   filteredData: UserData[];
   isLoading: boolean;
   pageSize: number; 
@@ -33,6 +33,7 @@ export const UsersView = ({
               value={searchTerm}
               onChange={onSearchChange}
               placeholder={searchPlaceholder}
+              aria-label="Search users by name or email"
             />
           </Col>
         </Row>

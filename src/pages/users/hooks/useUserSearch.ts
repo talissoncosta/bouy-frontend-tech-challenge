@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { useDebounce } from "hooks";
 import { UserData } from "services/users/interface";
 
-export function useUserSearch(data: UserData[] | undefined) {
+export const useUserSearch = (data: UserData[] | undefined) => {
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
 

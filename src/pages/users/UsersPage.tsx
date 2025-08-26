@@ -6,7 +6,7 @@ import { useUserActions } from "./hooks";
 import { PAGE_SIZE } from "./constants";
 import { UsersView } from "./UsersView";
 
-export function UsersPage() {
+export const UsersPage = () => {
   const { formatMessage } = useIntl();
   const { data, isLoading } = useUsers();
   const { searchTerm, setSearchTerm, filteredData } = useUserSearch(data?.list);

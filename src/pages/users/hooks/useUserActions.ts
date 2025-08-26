@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { UserData } from "services/users/interface";
 
-export function useUserActions() {
+export const useUserActions = () => {
   const handleViewUser = useCallback((user: UserData) => {
     console.log('View user:', user);
     // TODO: Implement user view modal/page
