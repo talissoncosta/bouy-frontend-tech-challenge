@@ -1,26 +1,27 @@
 import { Table } from 'antd';
 import { useIntl } from 'react-intl';
-import { useMemo } from 'react';
+import { ComponentProps, useMemo } from 'react';
 import { UserData } from 'services/users/interface';
 import { UserRow } from '../UserRow';
 import { UserActions } from '../UserActions';
 
-interface UsersTableProps {
+type UsersTableProps = {
   data: UserData[];
   loading: boolean;
   pageSize: number;
   onViewUser?: (user: UserData) => void;
   onEditUser?: (user: UserData) => void;
-}
+} & ComponentProps<typeof Table>
 
 
-export function UsersTable({ 
+export const UsersTable = ({ 
   data, 
   loading, 
   pageSize,
   onViewUser,
-  onEditUser 
-}: UsersTableProps) {
+  onEditUser,
+  ...props
+}: UsersTableProps) => {
   const { formatMessage } = useIntl();
   
   const columns = useMemo(() => [
@@ -60,13 +61,20 @@ export function UsersTable({
       width: 120,
       render: (_: any, record: UserData) => (
         <UserActions
-          user={record}
-          onViewUser={onViewUser}
-          onEditUser={onEditUser}
+          onViewUser={() => onViewUser?.(record)}
+          onEditUser={() => onEditUser?.(record)}
         />
       ),
     },
   ], [formatMessage, loading, onViewUser, onEditUser]);
+
+  const pagination = useMemo(() => ({
+    pageSize,
+    showSizeChanger: false,
+    showQuickJumper: true,
+    showTotal: (total: number, range: [number, number]) => 
+      `${range[0]}-${range[1]} of ${total} users`,
+  }), [pageSize]);
 
   return (
     <Table
@@ -74,15 +82,10 @@ export function UsersTable({
       columns={columns}
       rowKey="id"
       loading={loading}
-      pagination={{
-        pageSize,
-        showSizeChanger: false,
-        showQuickJumper: true,
-        showTotal: (total, range) => 
-          `${range[0]}-${range[1]} of ${total} users`,
-      }}
+      pagination={pagination}
       scroll={{ x: 800 }}
       aria-label={formatMessage({ id: "page.users.table.aria.label" })}
+      {...props}
     />
   );
-}
+};  
