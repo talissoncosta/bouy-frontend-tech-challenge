@@ -1,4 +1,4 @@
-import { Table } from 'antd';
+import { Table, TableColumnType } from 'antd';
 import { useIntl } from 'react-intl';
 import { ComponentProps, useMemo } from 'react';
 import { UserData } from 'services/users/interface';
@@ -34,7 +34,7 @@ export const UsersTable = ({
     {
       title: formatMessage({ id: "page.users.table.columns.user" }),
       key: "user",
-      render: (_: any, record: UserData) => (
+      render: (_: unknown, record: UserData) => (
         <UserRow user={record} isLoading={loading} />
       ),
     },
@@ -59,14 +59,14 @@ export const UsersTable = ({
       title: formatMessage({ id: "page.users.table.columns.actions" }),
       key: "actions",
       width: 120,
-      render: (_: any, record: UserData) => (
+      render: (_: unknown, record: UserData) => (
         <UserActions
           onViewUser={() => onViewUser?.(record)}
           onEditUser={() => onEditUser?.(record)}
         />
       ),
     },
-  ], [formatMessage, loading, onViewUser, onEditUser]);
+  ] as any, [formatMessage, loading, onViewUser, onEditUser]);
 
   const pagination = useMemo(() => ({
     pageSize,
