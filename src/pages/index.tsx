@@ -6,7 +6,7 @@ import { AppPath } from "components";
 const Dashboard = lazy(() => import("./dashboard"));
 const BrandProfile = lazy(() => import("./brandProfile").then(m => ({ default: m.BrandProfile })));
 const UserProfile = lazy(() => import("./userProfile").then(m => ({ default: m.UserProfile })));
-const Users = lazy(() => import("./users").then(m => ({ default: m.Users })));
+const Users = lazy(() => import("./users").then(m => ({ default: m.UsersPage })));
 
 function PageLoader() {
   return (
