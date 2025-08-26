@@ -60,22 +60,4 @@ export function createTestUsers() {
   };
 }
 
-/**
- * Default props for UsersView component testing
- */
-export function createMockUsersViewProps(overrides: any = {}) {
-  const mockUsers = createMockUsersData(3);
-  
-  return {
-    filteredData: mockUsers,
-    isLoading: false,
-    pageSize: 13,
-    searchTerm: '',
-    onSearchChange: jest.fn(),
-    searchPlaceholder: 'Search users...',
-    searchAriaLabel: 'Search users',
-    onViewUser: jest.fn(),
-    onEditUser: jest.fn(),
-    ...overrides
-  };
-}
+
