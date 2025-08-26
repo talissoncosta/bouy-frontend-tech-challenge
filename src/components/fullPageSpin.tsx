@@ -18,7 +18,6 @@ export function FullPageSpin() {
         }}
         size="large"
       />
-      ;
     </div>
   );
 }
