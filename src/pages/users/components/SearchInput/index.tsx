@@ -6,22 +6,20 @@ interface SearchInputProps {
   onChange: (value: string) => void;
   placeholder?: string;
   'aria-label'?: string;
-  'data-testid'?: string;
 }
 
 export function SearchInput({ 
   value, 
   onChange, 
   placeholder = "Search users...",
-  'aria-label': ariaLabel = "Search users",
-  'data-testid': testId
+  'aria-label': ariaLabel = "Search users"
 }: SearchInputProps) {
   return (
-    <Input addonBefore={<SearchOutlined />}
+    <Input 
+      addonBefore={<SearchOutlined />}
       value={value}
       onChange={(e) => onChange(e.target.value)}
       allowClear
-      data-testid={testId}
       aria-label={ariaLabel}
       placeholder={placeholder}
     />
