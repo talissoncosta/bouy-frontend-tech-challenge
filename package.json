@@ -32,6 +32,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:ci": "react-scripts test --watchAll=false --coverage --passWithNoTests",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -54,6 +55,12 @@
   },
   "devDependencies": {
     "@axe-core/react": "^4.10.2",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "jest-axe": "^10.0.0"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!(antd|@ant-design|rc-.+|@babel/runtime)/)"
+    ]
   }
 }
