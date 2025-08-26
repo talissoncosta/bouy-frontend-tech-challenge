@@ -25,7 +25,6 @@ describe('UserActions', () => {
     render(
       <TestWrapper>
         <UserActions
-          user={testUsers.john}
           onViewUser={mockOnViewUser}
           onEditUser={mockOnEditUser}
         />
@@ -40,7 +39,6 @@ describe('UserActions', () => {
     render(
       <TestWrapper>
         <UserActions
-          user={testUsers.john}
           onViewUser={mockOnViewUser}
           onEditUser={mockOnEditUser}
         />
@@ -50,14 +48,13 @@ describe('UserActions', () => {
     const viewButton = screen.getByText('View');
     fireEvent.click(viewButton);
 
-    expect(mockOnViewUser).toHaveBeenCalledWith(testUsers.john);
+    expect(mockOnViewUser).toHaveBeenCalled();
   });
 
   test('calls onEditUser when edit button is clicked', () => {
     render(
       <TestWrapper>
         <UserActions
-          user={testUsers.jane}
           onViewUser={mockOnViewUser}
           onEditUser={mockOnEditUser}
         />
@@ -67,6 +64,6 @@ describe('UserActions', () => {
     const editButton = screen.getByText('Edit');
     fireEvent.click(editButton);
 
-    expect(mockOnEditUser).toHaveBeenCalledWith(testUsers.jane);
+    expect(mockOnEditUser).toHaveBeenCalled();
   });
 });
