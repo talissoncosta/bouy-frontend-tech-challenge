@@ -1,22 +1,21 @@
 import { Avatar } from 'antd';
+import { ComponentProps } from 'react';
 import { UserData } from 'services/users/interface';
 
-interface UserAvatarProps {
+type UserAvatarProps = {
   user: UserData;
   size?: number;
   className?: string;
-}
+} & ComponentProps<typeof Avatar>
 
-export function UserAvatar({ user, size = 40, className = '' }: UserAvatarProps) {
-  return (
-    <Avatar
-      src={user.image}
-      alt={`${user.firstName} ${user.lastName}`}
-      size={size}
-      className={className}
-      aria-label={`Avatar for ${user.fullName}`}
-    >
-      {user.firstName[0]}{user.lastName[0]}
-    </Avatar>
-  );
-}
+export const UserAvatar = ({ user, size = 40, className = '', ...props }: UserAvatarProps) => (
+  <Avatar
+    src={user.image}
+    alt={`${user.firstName} ${user.lastName}`}
+    size={size}
+    className={className}
+    {...props}
+  >
+    {user.firstName[0]}{user.lastName[0]}
+  </Avatar>
+);

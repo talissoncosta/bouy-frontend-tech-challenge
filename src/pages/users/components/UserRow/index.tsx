@@ -3,18 +3,18 @@ import { UserAvatar } from '../UserAvatar';
 import { theme } from 'antd';
 import styles from './styles.module.css';
 
-interface UserRowProps {
+type UserRowProps = {
   user: UserData;
   isLoading?: boolean;
 }
 
-export function UserRow({ user, isLoading = false }: UserRowProps) {
+export const UserRow = ({ user, isLoading = false }: UserRowProps) => {
   const {
     token: { colorText }
   } = theme.useToken();
 
   return (
-    <div className={styles.userRow} aria-label={`User: ${user.fullName}`}>
+    <div className={styles.userRow}>
       <UserAvatar user={user} />
       <div className={styles.userInfo}>
         {isLoading ? (
@@ -27,4 +27,4 @@ export function UserRow({ user, isLoading = false }: UserRowProps) {
       </div>
     </div>
   );
-}
+};

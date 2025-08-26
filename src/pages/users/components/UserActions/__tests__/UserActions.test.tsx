@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { UserActions } from '../index';
-import { createTestUsers, TEST_MESSAGES } from 'tests/utils';
+import { TEST_MESSAGES } from 'tests/utils';
 
 // Test wrapper with IntlProvider
 function TestWrapper({ children }: { children: React.ReactNode }) {
@@ -13,7 +13,6 @@ function TestWrapper({ children }: { children: React.ReactNode }) {
 }
 
 describe('UserActions', () => {
-  const testUsers = createTestUsers();
   const mockOnViewUser = jest.fn();
   const mockOnEditUser = jest.fn();
 
