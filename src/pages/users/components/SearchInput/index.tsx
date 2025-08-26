@@ -7,7 +7,7 @@ type SearchInputProps = {
   onChange: (value: string) => void;
   placeholder?: string;
   'aria-label'?: string;
-} & ComponentProps<typeof Input>
+} & Omit<ComponentProps<typeof Input>, 'onChange'>
 
 export const SearchInput = ({ 
   value, 

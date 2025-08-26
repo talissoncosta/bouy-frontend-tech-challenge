@@ -33,7 +33,6 @@ export const UsersView = ({
               value={searchTerm}
               onChange={onSearchChange}
               placeholder={searchPlaceholder}
-              aria-label="Search users by name or email"
             />
           </Col>
         </Row>
