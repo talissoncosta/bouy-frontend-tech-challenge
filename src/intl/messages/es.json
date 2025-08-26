@@ -16,7 +16,8 @@
   "navigation.crudExamples": "CrudExamples",
   "navigation.brandProfile": "Perfil de Marca",
   "navigation.userProfile": "Perfil de Usuario",
-
+  "navigation.users": "Usuarios",
+  "navigation.usersManagement": "Gestión de Usuarios",
   "page.brandProfile.anchor.basicInfo": "Info Basica",
   "page.brandProfile.anchor.regionInfo": "Info Region",
   "page.brandProfile.anchor.rss": "RSS",
@@ -68,5 +69,22 @@
 
   "page.crudExamples.create.form.title.create.crudExample": "Crear crudExample",
   "page.crudExamples.tab.information.title.create.crudExample": "Información básica",
-  "page.crudExamples.form.crudExample.name": "Nombre"
+  "page.crudExamples.form.crudExample.name": "Nombre",
+
+  "page.users.title": "Gestión de Usuarios",
+  "page.users.search.placeholder": "Buscar por nombre o email",
+  "page.users.search.aria.label": "Buscar usuarios",
+  "page.users.table.columns.id": "ID",
+  "page.users.table.columns.user": "Usuario",
+  "page.users.table.columns.firstName": "Nombre",
+  "page.users.table.columns.lastName": "Apellido",
+  "page.users.table.columns.email": "Email",
+  "page.users.table.columns.actions": "Acciones",
+  "page.users.table.actions.view": "Ver",
+  "page.users.table.actions.edit": "Editar",
+  "page.users.table.actions.view.aria": "Ver detalles de {name}",
+  "page.users.table.actions.edit.aria": "Editar {name}",
+  "page.users.table.aria.label": "Tabla de datos de usuarios",
+  "page.users.table.sort.email.tooltip": "Haz clic para ordenar por email",
+  "page.users.avatar.aria.label": "Avatar de {name}"
 }
